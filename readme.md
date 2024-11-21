@@ -57,10 +57,10 @@ The application uses **PostgreSQL** as its database and **pgAdmin** for database
 ````bash
 git clone https://github.com/your-repo/event-management-app.git
 cd event-management-app
-
+````
 
 #### 2. Run docker compose
 ```bash
 docker compose up --build --detach
+````
 
-#### 3. the project
