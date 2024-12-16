@@ -41,14 +41,19 @@
                             <!--Display status-->
                             <td>Active</td>
                             <td class="text-end">
-                                <form action="" method="get">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
-                                    </input>
-                                </form>
-                                <br>
-                                <form th:action="@{|/${user.id}/delete|}" method="post">
-                                    <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                </form>
+                                <div class="row ">
+                                    <div class="col-md-2 offset-md-6 p-2">
+                                        <form th:action="@{|/${user.id}/update|}" method="get">
+                                            <input type="submit" class="btn btn-primary " value="Edit">
+                                            </input>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2 p-2">
+                                        <form th:action="@{|/${user.id}/delete|}" method="post">
+                                            <input type="submit" class="btn btn-danger" value="Delete"></input>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

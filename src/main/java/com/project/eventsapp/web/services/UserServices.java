@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.project.eventsapp.web.models.auth.User;
 import com.project.eventsapp.web.repository.UserRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserServices {
     @Autowired
@@ -23,7 +25,19 @@ public class UserServices {
     }
 
     public User getUserById(Long id) {
-        return userRepo.findById(id).get();
+        if (id == null) {
+            return null;
+        }
+        return this.userRepo
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " not found"));
+    }
+
+    public User updateUser(Long id, User user) {
+        User existingUser = this.getUserById(id);
+        existingUser.setEmail(user.getEmail());
+        existingUser.setUsername(user.getUsername());
+        return userRepo.save(existingUser);
     }
 
     public boolean deleteUser(Long id) {

@@ -6,12 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Users</title>
-    <link th:replace="layouts/layout::link">
+    <link th:replace="~{layouts/layout::link}">
 </head>
 
-<body th:replace="layouts/layout::body(title='Home')">
-    <div class="container" th:fragment="content">
-        update
+<body th:replace="~{layouts/layout::body}">
+
+    <div class="content" th:fragment="content">
+        <div class="container">
+            <div class="page-title">
+                <h3>Users</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Update User</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Change the user details then click update</h5>
+                            <form accept-charset="utf-8" th:action="@{|/${id}/update|}" th:object="${registerForm}"
+                                method="post">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" th:field="*{username}" name="name" placeholder="Name"
+                                        class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" th:field="*{email}" name="email" placeholder="Email Address"
+                                        class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-primary" value="Update now">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -9,50 +9,43 @@
     <link th:replace="~{layouts/layout::link}">
 </head>
 
-<body th:replace="~{layouts/layout::body(title='Home')}">
-    <div class="container" th:fragment="content">
-        <div class="page-title">
-            <h3>Users
-                <a th:href="@{/users/create}" class="btn btn-sm btn-outline-primary float-end"><i
-                        class="fas fa-user-shield"></i>
-                    Add users</a>
-            </h3>
-        </div>
-        <div class="box box-primary">
-            <div class="box-body">
-                <table width="100%" class="table table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="user:${users}">
-                            <!--Display username-->
-                            <td th:text="${user.username}">/td>
-                                <!--Display email-->
-                            <td th:text="${user.email}"></td>
-                            <!--Display role-->
-                            <td th:text="${user.role}"></td>
-                            <!--Display status-->
-                            <td>Active</td>
-                            <td class="text-end">
-                                <form action="" method="get">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
-                                    </input>
-                                </form>
-                                <br>
-                                <form th:action="@{|/${user.id}/delete|}" method="post">
-                                    <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+<body th:replace="~{layouts/layout::body}">
+
+    <div class="content" th:fragment="content">
+        <div class="container">
+            <div class="page-title">
+                <h3>Users</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">Create User</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Please fill all the fields below to create a new user</h5>
+                            <form accept-charset="utf-8" th:action="@{/users/create}" th:object="${registerForm}"
+                                method="post">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" th:field="*{username}" name="name" placeholder="Name"
+                                        class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" th:field="*{email}" name="email" placeholder="Email Address"
+                                        class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" th:field="*{password}" name="password" placeholder="Password"
+                                        class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-primary" value="Create now">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
