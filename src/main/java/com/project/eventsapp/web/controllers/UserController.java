@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.eventsapp.business.services.UserServices;
 import com.project.eventsapp.dao.entities.User;
 import com.project.eventsapp.web.models.auth.RegisterForm;
 import com.project.eventsapp.web.models.enums.roles;
-import com.project.eventsapp.web.services.UserServices;
 
 @Controller
 @RequestMapping("/users")

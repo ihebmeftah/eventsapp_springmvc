@@ -1,4 +1,4 @@
-package com.project.eventsapp.web.services;
+package com.project.eventsapp.business.services;
 
 import java.util.List;
 

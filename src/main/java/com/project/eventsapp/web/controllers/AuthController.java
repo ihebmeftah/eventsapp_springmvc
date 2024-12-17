@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.project.eventsapp.business.services.UserServices;
 import com.project.eventsapp.dao.entities.User;
 import com.project.eventsapp.web.models.auth.LoginForm;
 import com.project.eventsapp.web.models.auth.RegisterForm;
 import com.project.eventsapp.web.models.enums.roles;
-import com.project.eventsapp.web.services.UserServices;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
