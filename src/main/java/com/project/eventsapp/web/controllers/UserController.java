@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.eventsapp.dao.entities.User;
@@ -20,6 +21,7 @@ import com.project.eventsapp.web.models.enums.roles;
 import com.project.eventsapp.web.services.UserServices;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserServices userServices;
@@ -32,7 +34,7 @@ public class UserController {
      * @param model    Spring MVC model to store the users and pagination data.
      * @return The users view.
      */
-    @GetMapping("users")
+    @GetMapping()
     public String getUsersView(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int pageSize,
@@ -51,7 +53,7 @@ public class UserController {
      * @param model the model to hold attributes for the view
      * @return the name of the view template for creating a new user
      */
-    @GetMapping("/users/create")
+    @GetMapping("/create")
     public String getCreateUsersView(Model model) {
         model.addAttribute("registerForm", new RegisterForm());
         return "users/create-user";
@@ -64,7 +66,7 @@ public class UserController {
      * @param registerForm the form containing the details of the user to be created
      * @return the name of the view template to redirect to after creating the user
      */
-    @PostMapping("/users/create")
+    @PostMapping("/create")
     public String onCreate(Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
         List<roles> r = new ArrayList<>();
