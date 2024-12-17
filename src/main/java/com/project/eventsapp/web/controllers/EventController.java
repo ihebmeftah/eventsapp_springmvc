@@ -5,4 +5,5 @@ import org.springframework.stereotype.Controller;
 @Controller("events")
 public class EventController {
     
+    
 }
