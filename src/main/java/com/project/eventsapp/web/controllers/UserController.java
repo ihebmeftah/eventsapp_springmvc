@@ -24,6 +24,14 @@ public class UserController {
     @Autowired
     private UserServices userServices;
 
+    /**
+     * View for listing all the users in the application.
+     * 
+     * @param page     The page number of the users to display.
+     * @param pageSize The number of users to display per page.
+     * @param model    Spring MVC model to store the users and pagination data.
+     * @return The users view.
+     */
     @GetMapping("users")
     public String getUsersView(
             @RequestParam(defaultValue = "0") int page,
@@ -37,13 +45,25 @@ public class UserController {
         return "users/users";
     }
 
-    // CREATE
+    /**
+     * Handles GET requests for creating a new user.
+     * 
+     * @param model the model to hold attributes for the view
+     * @return the name of the view template for creating a new user
+     */
     @GetMapping("/users/create")
     public String getCreateUsersView(Model model) {
         model.addAttribute("registerForm", new RegisterForm());
         return "users/create-user";
     }
 
+    /**
+     * Handles POST requests for creating a new user.
+     * 
+     * @param model        the model to hold attributes for the view
+     * @param registerForm the form containing the details of the user to be created
+     * @return the name of the view template to redirect to after creating the user
+     */
     @PostMapping("/users/create")
     public String onCreate(Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
@@ -54,21 +74,34 @@ public class UserController {
         user.setPassword(registerForm.getPassword());
         user.setRoles(r);
         user = userServices.createUser(user);
-        System.out.println(user.getRoles());
         return "redirect:/users";
     }
-    // END CREATE
 
-    // UPDATE
+    /**
+     * Handles GET requests for updating a user.
+     * 
+     * @param id    the id of the user to be updated
+     * @param model the model to hold attributes for the view
+     * @return the name of the view template for updating a user
+     */
     @GetMapping("/{id}/update")
+
     public String getUpdateUsersView(@PathVariable Long id, Model model) {
         User user = userServices.getUserById(id);
         model.addAttribute("registerForm",
                 new RegisterForm(user.getUsername(), user.getEmail(), user.getPassword()));
         model.addAttribute("id", user.getId());
-        System.out.println(user.getPassword());
         return "users/update-user";
     }
+
+    /**
+     * Handles POST requests for updating an existing user's information.
+     * 
+     * @param id           the id of the user to be updated
+     * @param model        the model to hold attributes for the view
+     * @param registerForm the form containing the updated user details
+     * @return a redirect to the users page after successful update
+     */
 
     @PostMapping("/{id}/update")
     public String onUpdate(@PathVariable Long id, Model model, @ModelAttribute RegisterForm registerForm) {
@@ -79,9 +112,15 @@ public class UserController {
         return "redirect:/users";
 
     }
-    // END UPDATE
 
+    /**
+     * Handles POST requests for deleting a user.
+     * 
+     * @param id the id of the user to be deleted
+     * @return a redirect to the users page after successful deletion
+     */
     @PostMapping(path = "/{id}/delete")
+
     public String deleteUser(@PathVariable("id") Long id) {
         userServices.deleteUser(id);
         return "redirect:/users";
