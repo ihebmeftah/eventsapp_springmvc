@@ -3,6 +3,8 @@ package com.project.eventsapp.web.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.eventsapp.web.models.auth.User;
@@ -22,6 +24,13 @@ public class UserServices {
 
     public List<User> getUsers() {
         return userRepo.findAll();
+    }
+
+    public Page<User> getUsersPagination(Pageable pegeable) {
+        if (pegeable == null) {
+            return null;
+        }
+        return this.userRepo.findAll(pegeable);
     }
 
     public User getUserById(Long id) {
