@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.project.eventsapp.web.models.auth.User;
-import com.project.eventsapp.web.repository.UserRepo;
+import com.project.eventsapp.dao.entities.User;
+import com.project.eventsapp.dao.repository.UserRepo;
 
 import jakarta.persistence.EntityNotFoundException;
 

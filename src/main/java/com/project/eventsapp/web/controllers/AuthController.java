@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.project.eventsapp.dao.entities.User;
 import com.project.eventsapp.web.models.auth.LoginForm;
 import com.project.eventsapp.web.models.auth.RegisterForm;
-import com.project.eventsapp.web.models.auth.User;
 import com.project.eventsapp.web.models.enums.roles;
 import com.project.eventsapp.web.services.UserServices;
 
@@ -49,10 +49,12 @@ public class AuthController {
     @PostMapping("signup")
     public String onSignup(Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
+        List<roles> r = new ArrayList<>();
+        r.add(roles.CLIENT);
         user.setUsername(registerForm.getUsername());
         user.setEmail(registerForm.getEmail());
         user.setPassword(registerForm.getPassword());
-        user.setRole(roles.CLIENT);
+        user.setRoles(r);
         userServices.createUser(user);
         return "redirect:/dashboard";
     }

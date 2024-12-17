@@ -37,7 +37,7 @@
                                 <!--Display email-->
                             <td th:text="${user.email}"></td>
                             <!--Display role-->
-                            <td th:text="${user.role}"></td>
+                            <td th:text="${#strings.toLowerCase(user.roles[0])}"></td>
                             <!--Display status-->
                             <td>Active</td>
                             <td class="text-end">

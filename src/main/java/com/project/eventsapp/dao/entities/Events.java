@@ -1,11 +1,12 @@
-package com.project.eventsapp.web.models.auth;
-
-import com.project.eventsapp.web.models.enums.roles;
+package com.project.eventsapp.dao.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,14 +19,21 @@ import jakarta.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "events")
+public class Events {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
-    @Column(unique = true)
-    private String email;
-    private String password;
-    private roles role;
+    @Column(nullable = false)
+    private String title;
+    @Column()
+    private String subtitle;
+    @Column()
+    private String description;
+    @Column()
+    private String photo;
+    @Column()
+    private Long capacity;
+    @Column(nullable = false)
+    private Date date;
 }

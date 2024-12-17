@@ -1,5 +1,8 @@
 package com.project.eventsapp.web.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.eventsapp.dao.entities.User;
 import com.project.eventsapp.web.models.auth.RegisterForm;
-import com.project.eventsapp.web.models.auth.User;
 import com.project.eventsapp.web.models.enums.roles;
 import com.project.eventsapp.web.services.UserServices;
 
@@ -44,11 +47,14 @@ public class UserController {
     @PostMapping("/users/create")
     public String onCreate(Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
+        List<roles> r = new ArrayList<>();
+        r.add(roles.CLIENT);
         user.setUsername(registerForm.getUsername());
         user.setEmail(registerForm.getEmail());
         user.setPassword(registerForm.getPassword());
-        user.setRole(roles.CLIENT);
-        userServices.createUser(user);
+        user.setRoles(r);
+        user = userServices.createUser(user);
+        System.out.println(user.getRoles());
         return "redirect:/users";
     }
     // END CREATE
