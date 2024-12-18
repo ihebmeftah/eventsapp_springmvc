@@ -19,7 +19,6 @@ public class UserServices {
 
     public User createUser(User user) {
         return userRepo.save(user);
-
     }
 
     public List<User> getUsers() {

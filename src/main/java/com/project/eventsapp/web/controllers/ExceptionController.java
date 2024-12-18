@@ -16,7 +16,6 @@ public class ExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     private String missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException e) {
-
         return "Error:" + e.getMessage();
     }
 
