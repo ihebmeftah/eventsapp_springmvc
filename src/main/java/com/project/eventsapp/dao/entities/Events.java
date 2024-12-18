@@ -29,6 +29,8 @@ public class Events {
     @Column()
     private String subtitle;
     @Column()
+    private String adress;
+    @Column()
     private String description;
     @Column()
     private String photo;
