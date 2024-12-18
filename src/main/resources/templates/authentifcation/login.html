@@ -15,8 +15,13 @@
         <div class="auth-content">
             <div class="card">
                 <div class="card-body text-center">
-
                     <h6 class="mb-4 text-muted">Login to your account</h6>
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Invalid username or password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                        You have been logged out.
+                    </div>
                     <form th:action="@{/login}" th:object="${loginForm}" method="POST">
                         <div class="mb-3 text-start">
                             <label for="email" class="form-label">Email adress</label>
@@ -27,14 +32,6 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" th:field="*{password}" class="form-control" placeholder="Password"
                                 required>
-                        </div>
-                        <div class="mb-3 text-start">
-                            <div class="form-check">
-                                <input class="form-check-input" name="remember" type="checkbox" value="" id="check1">
-                                <label class="form-check-label" for="check1">
-                                    Remember me on this device
-                                </label>
-                            </div>
                         </div>
                         <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Login" />
                     </form>

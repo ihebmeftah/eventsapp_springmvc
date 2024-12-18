@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.eventsapp.business.services.UserServices;
 import com.project.eventsapp.dao.entities.User;
 import com.project.eventsapp.web.models.auth.RegisterForm;
-import com.project.eventsapp.web.models.enums.roles;
 
 @Controller
 @RequestMapping("/users")
@@ -69,13 +68,13 @@ public class UserController {
     @PostMapping("/create")
     public String onCreate(Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
-        List<roles> r = new ArrayList<>();
-        r.add(roles.CLIENT);
+        List<String> r = new ArrayList<>();
+        r.add("client");
         user.setUsername(registerForm.getUsername());
         user.setEmail(registerForm.getEmail());
         user.setPassword(registerForm.getPassword());
         user.setRoles(r);
-        user = userServices.createUser(user);
+        user = userServices.saveUser(user);
         return "redirect:/users";
     }
 
@@ -88,7 +87,7 @@ public class UserController {
      */
     @GetMapping("/{id}/update")
 
-    public String getUpdateUsersView(@PathVariable Long id, Model model) {
+    public String getUpdateUsersView(@PathVariable Integer id, Model model) {
         User user = userServices.getUserById(id);
         model.addAttribute("registerForm",
                 new RegisterForm(user.getUsername(), user.getEmail(), user.getPassword()));
@@ -106,7 +105,7 @@ public class UserController {
      */
 
     @PostMapping("/{id}/update")
-    public String onUpdate(@PathVariable Long id, Model model, @ModelAttribute RegisterForm registerForm) {
+    public String onUpdate(@PathVariable Integer id, Model model, @ModelAttribute RegisterForm registerForm) {
         User user = new User();
         user.setUsername(registerForm.getUsername());
         user.setEmail(registerForm.getEmail());
@@ -123,7 +122,7 @@ public class UserController {
      */
     @PostMapping(path = "/{id}/delete")
 
-    public String deleteUser(@PathVariable("id") Long id) {
+    public String deleteUser(@PathVariable("id") Integer id) {
         userServices.deleteUser(id);
         return "redirect:/users";
     }
