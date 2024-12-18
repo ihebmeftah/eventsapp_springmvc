@@ -5,54 +5,68 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users</title>
+    <title>Create new Event</title>
     <link th:replace="~{layouts/layout::link}">
 </head>
 
 <body th:replace="~{layouts/layout::body}">
-    <div class="container" th:fragment="content">
-        <div class="page-title">
-            <h3>Users
-                <a th:href="@{/users/create}" class="btn btn-sm btn-outline-primary float-end"><i
-                        class="fas fa-user-shield"></i>
-                    Add users</a>
-            </h3>
-        </div>
-        <div class="box box-primary">
-            <div class="box-body">
-                <table width="100%" class="table table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="user:${users}">
-                            <!--Display username-->
-                            <td th:text="${user.username}">/td>
-                                <!--Display email-->
-                            <td th:text="${user.email}"></td>
-                            <!--Display role-->
-                            <td th:text="${user.role}"></td>
-                            <!--Display status-->
-                            <td>Active</td>
-                            <td class="text-end">
-                                <form action="" method="get">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
-                                    </input>
-                                </form>
-                                <br>
-                                <form th:action="@{|/${user.id}/delete|}" method="post">
-                                    <input type="submit" class="btn btn-danger" value="Delete"></input>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+    <div class="content" th:fragment="content">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">Create new event</div>
+                <div class="card-body">
+                    <form class="needs-validation" th:action="@{/events/create}" th:object="${eventForm}" method="POST"
+                        enctype="multipart/form-data" accept-charset="utf-8">
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-6">
+                                <label for="Title" class="form-label">Title</label>
+                                <input type="text" class="form-control" th:field="*{title}" name="Title"
+                                    placeholder="Title" required>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="Subtitle" class="form-label">Subtitle</label>
+                                <input type="text" th:field="*{subtitle}" class="form-control" name="Subtitle"
+                                    placeholder="Subtitle" required>
+                            </div>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-6">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" th:field="*{adress}" name="address"
+                                    placeholder="1234 Main St, Unit, Building, or Floor" required>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label for="Capacity" class="form-label">Capacity</label>
+                                <input type="number" class="form-control" name="Capacity" th:field="*{capacity}"
+                                    required>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label for="Date" class="form-label">Date</label>
+                                <input type="date" class="form-control" name="Date" th:field="*{date}"
+                                    placeholder="YYYY-MM-DD HH:MM:SS" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Description" class="form-label">Description</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" th:field="*{description}"
+                                    placeholder="Leave a comment here" id="floatingTextarea2"
+                                    style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Description</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <input type="file" name="file" class="form-control" id="inputGroupFile01">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-primary" value="Create now">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
