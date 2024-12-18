@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Events list</title>
+    <link th:replace="~{layouts/layout::link}">
+</head>
+
+<body th:replace="~{layouts/layout::body}">
+
+    <div class="content" th:fragment="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">You can search events by name or date ...</h5>
+                    <form accept-charset="utf-8" method="get" action="/events">
+                        <div class="row g-2">
+                            <div class="col">
+                                <input type="text" name="title" th:value="${title}" placeholder="search by name or date"
+                                    class="form-control">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">search</button>
+                            </div>
+                            <div>
+                                <a th:href="@{events/create}" class="btn btn-primary">Add events</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" th:each="event,state:${events}">
+                    <div class="card">
+                        <img th:src="(${event.photo}?@{|/img/${event.photo}|}:@{img/bootstraper-logo.png})"
+                            class="card-img-top img-responsive" height="120">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${event.title}"></h5>
+                            <h6 class=" card-subtitle mb-2 text-muted" th:text="${event.subtitle} "></h6>
+                            <h6 class=" card-subtitle mb-2 text-muted" th:text="${event.date} "></h6>
+                            <p class="card-text" th:text="${event.description}"></p>
+                            <div class="container">
+                                <div class="row align-items-start">
+                                    <div class="col">
+                                        <a th:href="@{|events/${event.id}|}" class="btn btn-success w-100">Consult</a>
+                                    </div>
+                                    <div class="col">
+                                        <a th:href="@{|events/${event.id}/update|}"
+                                            class="btn btn-primary btn-block w-100">Update</a>
+                                    </div>
+                                    <div class="col">
+                                        <form th:action="@{|events/${event.id}/delete|}" method="post">
+                                            <input type="submit" class="btn btn-danger btn-block w-100"
+                                                value="Delete" />
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage==0?'disabled':''}">
+                        <a class="page-link" th:href="@{|/events?page=${currentPage-1}|}" tabindex="-1"
+                            aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item" th:each="index: ${#numbers.sequence(0,totalPages -1)}"
+                        th:classappend="${currentPage==index ?'active':''}"><a class="page-link"
+                            th:href="@{|/events?page=${index}|}" th:text="${index+1}"></a></li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{|/events?page=${currentPage+1}|}"
+                            th:classappend="${currentPage== totalPages -1?'disabled':''}">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
