@@ -2,9 +2,9 @@ package com.project.eventsapp.dao.entities;
 
 import java.util.List;
 
-import com.project.eventsapp.web.models.enums.roles;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Getter
 @Setter
@@ -44,5 +45,5 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn())
     @Column()
-    private List<roles> roles;
+    private List<String> roles;
 }
