@@ -44,16 +44,18 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end nav-link-menu">
                                     <ul class="nav-list">
-                                        <!--    <li><a href="" class="dropdown-item"><i class="fas fa-address-card"></i>
+                                        <li><a href="" class="dropdown-item"><i class="fas fa-address-card"></i>
                                                 Profile</a></li>
                                         <li><a href="" class="dropdown-item"><i class="fas fa-envelope"></i>
                                                 Messages</a></li>
                                         <li><a href="" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
-                                        </li> -->
+                                        </li>
                                         <div class="dropdown-divider"></div>
-                                        <li><a th:href="@{/login}" class="dropdown-item"><i
-                                                    class="fas fa-sign-out-alt"></i>
-                                                Logout</a></li>
+                                        <li>
+                                            <form th:action="@{/logout}" method="post" class="row   m-2">
+                                                <input class="btn btn-danger col" type="submit" value="Logout" />
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
