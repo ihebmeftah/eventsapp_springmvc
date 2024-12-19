@@ -96,4 +96,8 @@ public class UserServices implements UserDetailsService {
 		userRepository.deleteById(id);
 		return true;
 	}
+
+	public Long getNbuser() {
+		return userRepository.count();
+	}
 }
