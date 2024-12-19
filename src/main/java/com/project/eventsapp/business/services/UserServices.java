@@ -33,7 +33,6 @@ public class UserServices implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
 		Optional<User> optUser = userRepository.findUserByEmail(email);
 
 		org.springframework.security.core.userdetails.User springUser = null;
@@ -56,17 +55,14 @@ public class UserServices implements UserDetailsService {
 	}
 
 	public User saveUser(User user) {
-		// Vérifier si un utilisateur avec la même adresse e-mail existe déjà
 		if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
 			throw new DataIntegrityViolationException(
 					"User with this email '" + user.getEmail() + "' address already exists");
 		}
-
 		String passwd = user.getPassword();
 		String encodedPasswod = passwordEncoder.encode(passwd);
 		user.setPassword(encodedPasswod);
 		return userRepository.save(user);
-
 	}
 
 	public List<User> getUsers() {

@@ -22,18 +22,18 @@
                     <div th:if="${param.logout}" class="alert alert-success" role="alert">
                         You have been logged out.
                     </div>
-                    <form th:action="@{/login}" th:object="${loginForm}" method="POST">
+                    <form th:action="@{/login}" method="POST">
                         <div class="mb-3 text-start">
                             <label for="email" class="form-label">Email adress</label>
-                            <input type="email" th:field="*{email}" class="form-control" placeholder="Enter Email"
-                                required>
+                            <input type="email" name="username" id="username" class="form-control"
+                                placeholder="Enter Email" required>
                         </div>
                         <div class="mb-3 text-start">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" th:field="*{password}" class="form-control" placeholder="Password"
-                                required>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Password" required>
                         </div>
-                        <input type="submit" class="btn btn-primary shadow-2 mb-4" value="Login" />
+                        <button type="submit" class="btn btn-primary shadow-2 mb-4" />Login</button>
                     </form>
                     <p class="mb-2 text-muted">Forgot password? <a th:href="@{/forgot-password}">Reset</a></p>
                     <p class="mb-0 text-muted">Don't have account yet? <a th:href="@{/signup}">Signup</a></p>

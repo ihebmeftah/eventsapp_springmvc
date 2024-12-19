@@ -27,35 +27,28 @@ public class WebSecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers("/",
-                                                                "/home",
-                                                                "/webjars/**",
-                                                                "/img/**",
-                                                                "/css/**", 
-                                                                "/js/**", "/components/**",
-                                                                "/vendor/**")
+                                                .requestMatchers(
+                                                                "/signup",
+                                                                "/css/**",
+                                                                "/components/**",
+                                                                "/js/**",
+                                                                "/vendor/**",
+                                                                "/font/**",
+                                                                "/img/**")
                                                 .permitAll()
-                                                .anyRequest().authenticated() // Tous les endpoints nécessitent une
-                                                                              // authentification
-                                )
-                                // .formLogin(Customizer.withDefaults()); // Active le formulaire de login par
-                                // défaut
+                                                .anyRequest().authenticated())
+
                                 .formLogin((form) -> form
                                                 .loginPage("/login")
                                                 .permitAll()
-                                                // .defaultSuccessUrl("/", true) // Rediriger vers home après login
                                                 .successHandler((request, response, authentication) -> {
-                                                        // Si une URL sauvegardée existe (SavedRequest), y rediriger,
-                                                        // sinon rediriger vers home "/"
                                                         var savedRequest = (org.springframework.security.web.savedrequest.DefaultSavedRequest) request
                                                                         .getSession()
                                                                         .getAttribute("SPRING_SECURITY_SAVED_REQUEST");
                                                         if (savedRequest != null) {
                                                                 response.sendRedirect(savedRequest.getRequestURL());
                                                         } else {
-                                                                response.sendRedirect("/"); // URL par défaut si
-                                                                                            // aucune URL
-                                                                                            // sauvegardée n'existe
+                                                                response.sendRedirect("/");
                                                         }
                                                 }))
                                 .exceptionHandling((exceptionHandling) -> exceptionHandling
@@ -66,14 +59,10 @@ public class WebSecurityConfig {
 
         @Bean
         public UserDetailsService userDetailsService() {
-
                 UserDetails user = User.withUsername("admin")
-                                .password(
-                                                "{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
-                                // password: "password"
+                                .password("{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
                                 .roles("ADMIN")
                                 .build();
-
                 return new InMemoryUserDetailsManager(user);
         }
 
